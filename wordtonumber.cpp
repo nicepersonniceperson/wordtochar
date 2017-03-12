@@ -14,9 +14,10 @@ rofile.open ("number.txt");
 ifile.open ("word.txt");
 int x=0;
 while (rofile >> word) x++;
-if (x>256)
+cout << x << '\n';
+if (x>127)
 {
-        cout << "أقصى عدد للكلمات 256";
+        cout << "لم تنجح فأقصى عدد للكلمات 128" << '\n';
         exit(1);
 }
 string oarray[x];
@@ -48,17 +49,11 @@ while (ifile >> word)
                 x++;
         }
 }
-cout << x << ": عدد الكلمات الجديدة";
-if (x>256-sizeof(oarray))
+cout << x << ": عدد الكلمات الجديدة" << '\n';
+cout << "عدد الكلمات القديمة:" << sizeof(oarray)/ sizeof(oarray[0]) << "\n";
+if (x>127-sizeof(oarray)/sizeof(oarray[0]))
 {
-        cout << "أقصى عدد للكلمات 256";
-        exit(1);
-}
-
-cout << x << ": عدد الكلمات الجديدة";
-if (x>256-sizeof(oarray))
-{
-        cout << "أقصى عدد للكلمات 256";
+        cout << "لم تنجح حيث أن أقصى عدد للكلمات 128" << '\n';
         exit(1);
 }
 
@@ -102,9 +97,9 @@ while (ifile >> word)
 {
         for( int a = 0; a < sizeof(oarray)/sizeof(oarray[0]); a = a + 1 )
         {
-                if ( word == oarray[a] || word == "" )
+                if ( word == oarray[a] )
                 {
-                        c = 'A' - 56 + a;
+                        c = 'A' - 65 + a;
                         efile << c;
                         break;
                 }
@@ -113,7 +108,7 @@ while (ifile >> word)
         {
                 if ( word == noarray[a] )
                 {
-                        c = 'A' - 56 + a +sizeof(oarray);
+                        c = 'A' - 65 + a +sizeof(oarray)/sizeof(oarray[0]);
                         efile << c;
                         break;
                 }
